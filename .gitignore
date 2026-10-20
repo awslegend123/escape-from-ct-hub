@@ -1,0 +1,15 @@
+# Not part of the app: product-thinking course files kept in this folder
+MISSION.md
+NOTES.md
+RESOURCES.md
+assets/
+games/
+learning-records/
+lessons/
+reference/
+
+# Local tooling
+.claude/
+
+# Secrets for notify.js
+.env

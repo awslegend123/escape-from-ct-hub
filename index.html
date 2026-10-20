@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120b2e">
+  <title>Escape from CT Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8C%82%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="crt" aria-hidden="true"></div>
+
+  <header class="marquee">
+    <p class="coin">★ INSERT COIN ★</p>
+    <h1>ESCAPE FROM<br><span>CT HUB</span></h1>
+    <p class="sub">…but need umbrella or not?</p>
+  </header>
+
+  <main>
+    <section class="hero" id="hero" data-level="loading" aria-live="polite">
+      <div class="scene">
+        <svg id="scene" viewBox="0 0 320 180" role="img" aria-label="Pixel scene of a CT Hub office worker and the weather outside">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" class="sky-top"/>
+              <stop offset="1" class="sky-bottom"/>
+            </linearGradient>
+          </defs>
+          <rect class="sky" width="320" height="180" fill="url(#sky)"/>
+
+          <g id="sun" class="fx">
+            <circle cx="276" cy="36" r="16" class="sun-core"/>
+            <g class="sun-rays">
+              <rect x="274" y="6" width="4" height="8"/><rect x="274" y="58" width="4" height="8"/>
+              <rect x="246" y="34" width="8" height="4"/><rect x="298" y="34" width="8" height="4"/>
+              <rect x="254" y="14" width="6" height="6"/><rect x="292" y="14" width="6" height="6"/>
+              <rect x="254" y="52" width="6" height="6"/><rect x="292" y="52" width="6" height="6"/>
+            </g>
+          </g>
+
+          <g id="clouds" class="fx">
+            <g class="cloud c1"><rect x="150" y="22" width="48" height="12"/><rect x="160" y="14" width="24" height="10"/></g>
+            <g class="cloud c2"><rect x="230" y="40" width="56" height="12"/><rect x="242" y="30" width="28" height="12"/></g>
+          </g>
+
+          <polygon id="bolt" class="fx" points="214,18 200,52 212,52 204,80 228,42 215,42 224,18"/>
+
+          <!-- CT Hub tower -->
+          <g id="building">
+            <rect x="18" y="34" width="96" height="118" class="bldg"/>
+            <rect x="18" y="34" width="96" height="10" class="bldg-top"/>
+            <text x="66" y="42" class="bldg-sign" text-anchor="middle">CT HUB</text>
+            <g id="windows"></g>
+            <rect x="52" y="126" width="28" height="26" class="door"/>
+            <rect x="65" y="126" width="2" height="26" class="door-line"/>
+          </g>
+
+          <rect x="0" y="150" width="320" height="30" class="ground"/>
+          <g class="road-marks">
+            <rect x="130" y="164" width="18" height="3"/><rect x="170" y="164" width="18" height="3"/>
+            <rect x="210" y="164" width="18" height="3"/><rect x="250" y="164" width="18" height="3"/>
+            <rect x="290" y="164" width="18" height="3"/>
+          </g>
+
+          <g id="player">
+            <g id="umbrella" class="fx">
+              <path d="M -38 0 A 38 26 0 0 1 38 0 Z" class="umb"/>
+              <path d="M -38 0 A 38 26 0 0 1 -12 -23 L 0 0 Z" class="umb-stripe"/>
+              <path d="M 12 -23 A 38 26 0 0 1 38 0 L 0 0 Z" class="umb-stripe"/>
+              <rect x="-1.5" y="0" width="3" height="40" class="umb-handle"/>
+              <rect x="-1.5" y="-30" width="3" height="6" class="umb-handle"/>
+            </g>
+            <g id="sprite"></g>
+            <g id="speed" class="fx">
+              <rect x="-44" y="22" width="18" height="3"/><rect x="-52" y="34" width="24" height="3"/><rect x="-40" y="46" width="14" height="3"/>
+            </g>
+          </g>
+
+          <g id="rain" class="fx"></g>
+          <rect id="haze" class="fx" width="320" height="180"/>
+        </svg>
+      </div>
+
+      <div class="verdict">
+        <p class="player-tag">PLAYER 1 · 2 KALLANG AVE</p>
+        <h2 id="verdict-title">SCANNING…</h2>
+        <p id="verdict-sub" class="verdict-sub">Contacting NEA weather stations</p>
+        <ul id="gear" class="gear" aria-label="Bring before you leave" hidden></ul>
+        <ul id="reasons" class="reasons"></ul>
+      </div>
+    </section>
+
+    <h3 class="section-title">▶ STATUS SCREEN</h3>
+    <section class="grid" id="metrics"></section>
+  </main>
+
+  <footer class="console">
+    <div class="buttons">
+      <button id="refresh" class="btn" type="button">↻ RE-SCAN</button>
+      <button id="alert-btn" class="btn btn-alt" type="button" aria-pressed="false">🔕 11:50 ALERT: OFF</button>
+    </div>
+    <p class="hint">Pin this tab: its title shows what to bring. The 11:50 alert fires on weekdays while the tab is open.</p>
+    <p id="countdown" class="countdown">Next scan in --:--</p>
+    <p class="credits">Data: NEA via <a href="https://data.gov.sg/datasets?formats=API" target="_blank" rel="noopener">data.gov.sg</a> real-time APIs</p>
+  </footer>
+
+  <script src="rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

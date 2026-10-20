@@ -1,0 +1,27 @@
+# 11:50 SGT weekday phone alert via ntfy. See README: Phone alerts.
+name: Lunch alert
+
+on:
+  schedule:
+    # 03:35 UTC = 11:35 SGT, Mon-Fri. GitHub's cron often starts late, so it starts
+    # early and notify.js waits until 11:50 SGT (and skips if it's past 12:30).
+    - cron: '35 3 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Send a [TEST] alert now, even if there is nothing to bring'
+        type: boolean
+        default: true
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node notify.js ${{ inputs.test && '--test' || '' }}
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
